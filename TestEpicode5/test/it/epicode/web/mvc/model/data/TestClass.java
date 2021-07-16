@@ -34,6 +34,7 @@ class TestClass {
 	
 	@Test
 	void inserimentoFornitore() {
+		
 		CreatoreConnessione portal = new CreatoreConnessione("postgresql", "localhost", "5432", "esercitazione4",
 				"negozio", "postgres", "123");
 		FornitoreDAO t = new FornitoreDAO(portal);
@@ -47,7 +48,7 @@ class TestClass {
 			assertTrue(esisteFornitore(2));
 			//t.save(marchi);
 			//t.save(rogi);
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			fail(e.getMessage());
 		}
 		System.out.println("Eliminato Marchi");
@@ -62,7 +63,7 @@ class TestClass {
 		Fornitore marchi2 = new Fornitore(2, "X123", "Marchi", "Via verdi,3", "Verona");
 		try {
 			t.delete(marchi2);
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -85,7 +86,7 @@ class TestClass {
 			//t.save(prod2);
 			t.save(prod3);
 			
-		} catch (SQLException e) {
+		} catch (SQLException | DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -103,7 +104,7 @@ class TestClass {
 				t.update(prod3);
 				Prodotto upd = t.get(prod3.getId());
 				System.out.println(upd.getPrezzo());
-			} catch (SQLException e) {
+			} catch (SQLException | DataException e) {
 				e.printStackTrace();
 				fail("Non va una cippa");
 			}
@@ -119,7 +120,7 @@ class TestClass {
 		try {
 			Fornitore ciccio = t.get(1);
 			System.out.println(ciccio.getNome());
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -148,7 +149,7 @@ class TestClass {
 
 		try {
 			t.delete(5);
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -177,7 +178,7 @@ class TestClass {
 		try {
 			List<Fornitore> ciccio = t.getAll();
 			ciccio.forEach(f -> System.out.println(f.getNome()));
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -210,7 +211,7 @@ class TestClass {
 			t.update(rogi);
 			Fornitore upd = t.get(rogi.getId());
 			System.out.println(upd.getCodiceFornitore());
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -225,7 +226,7 @@ class TestClass {
 		try {
 			List<Fornitore> ciccio = t.getFornitoriPerCitta("Padova");
 			ciccio.forEach(f -> System.out.println(f.getNome()));
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}

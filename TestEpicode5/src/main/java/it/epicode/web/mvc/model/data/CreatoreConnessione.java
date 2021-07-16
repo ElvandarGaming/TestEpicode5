@@ -24,6 +24,16 @@ public class CreatoreConnessione {
 				databaseName, schema, username, password);
 	}
 	
+	private CreatoreConnessione(String url) {
+		this.url = url;
+	}
+	
+	public static CreatoreConnessione creatoreConnessione() {
+		return new CreatoreConnessione("jdbc:postgresql://localhost:5432/esercitazione4?currentSchema=negozio&user=postgres&password=123");
+	}
+	
+	
+	
 	public Connection getConnection() throws SQLException {
 		if (con == null || con.isClosed()) {
 			this.con = DriverManager.getConnection(url);

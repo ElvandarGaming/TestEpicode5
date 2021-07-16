@@ -11,7 +11,7 @@ import java.util.List;
 import it.epicode.web.mvc.model.Fornitore;
 import it.epicode.web.mvc.model.Prodotto;
 
-public class ProdottoDAO {
+public class ProdottoDAO implements AbsProdottoDAO{
 
 	public static final String GET_PRODOTTO_FROM_FORNITORE = "SELECT a.id as prod_id,a.codice_prodotto,a.nome as prod_name,a.descrizione,a.marca,a.codice_fornitore_fk,a.prezzo,\r\n"
 			+ "b.id as forn_id,b.codice_fornitore,b.nome as forn_name,b.indirizzo,b.citta FROM negozio.prodotto a INNER JOIN negozio.fornitore b ON a.codice_fornitore_fk= b.codice_fornitore\r\n"
@@ -30,7 +30,11 @@ public class ProdottoDAO {
 		this.conn = conn;
 	}
 
-	public List<Prodotto> getProdottoPerFornitore(Fornitore forn) throws SQLException {
+	public ProdottoDAO() {
+		this.conn = CreatoreConnessione.creatoreConnessione();
+	}
+	@Override
+	public List<Prodotto> getProdottoPerFornitore(Fornitore forn) throws DataException{
 		List<Prodotto> lista = new ArrayList<>();
 		try (Connection x = conn.getConnection();
 				PreparedStatement psta = x.prepareStatement(GET_PRODOTTO_FROM_FORNITORE);) {
@@ -45,12 +49,15 @@ public class ProdottoDAO {
 							res.getBigDecimal("prezzo")));
 				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 
 		return lista;
 	}
-	
-	public Prodotto get(long id) throws SQLException {
+	@Override
+	public Prodotto get(long id) throws DataException{
 		Prodotto letto = null;
 		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(GET_PRODOTTO_BY_ID);) {
 			psta.setLong(1, id);
@@ -62,12 +69,18 @@ public class ProdottoDAO {
 									res.getString("forn_name"), res.getString("indirizzo"), res.getString("citta")),
 							res.getBigDecimal("prezzo"));
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DataException(e.getMessage(), e);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 		return letto;
 	}
-
-	public List<Prodotto> getAll() throws SQLException {
+	@Override
+	public List<Prodotto> getAll() throws DataException{
 		List<Prodotto> letto = new ArrayList<>();
 		try (Connection x = conn.getConnection();
 				Statement stat = x.createStatement();
@@ -80,11 +93,14 @@ public class ProdottoDAO {
 						res.getBigDecimal("prezzo")));
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 		return letto;
 	}
-
-	public void save(Prodotto prod) throws SQLException {
+	@Override
+	public void save(Prodotto prod) throws DataException{
 		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(SAVE_PRODOTTO);) {
 			psta.setLong(1, prod.getId());
 			psta.setString(2, prod.getCodiceProdotto());
@@ -95,10 +111,13 @@ public class ProdottoDAO {
 			psta.setBigDecimal(7, prod.getPrezzo());
 
 			psta.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 	}
-
-	public void update(Prodotto prod) throws SQLException {
+	@Override
+	public void update(Prodotto prod) throws DataException{
 		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(UPDATE_PRODOTTO);) {
 			psta.setString(1, prod.getCodiceProdotto());
 			psta.setString(2, prod.getNome());
@@ -109,21 +128,31 @@ public class ProdottoDAO {
 			psta.setLong(7, prod.getId());
 
 			psta.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 	}
-
-	public void delete(Prodotto prod) throws SQLException {
+	@Override
+	public void delete(Prodotto prod) throws DataException{
 		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(DELETE_PRODOTTO);) {
 			psta.setLong(1, prod.getId());
 
 			psta.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 	}
-	public void delete(long id) throws SQLException {
+	@Override
+	public void delete(long id) throws DataException{
 		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(DELETE_PRODOTTO);) {
 			psta.setLong(1, id);
 
 			psta.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
 		}
 	}
 	

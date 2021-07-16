@@ -4,23 +4,35 @@
 <html>
 
 <head>
-<meta charset="ISO-8859-1" >
+
+<link type="image/x-icon" href="./icon/BC112.png" rel="shortcut icon">
+
+<meta charset="ISO-8859-1">
 <title>HOME</title>
+<style type="text/css">
+
+body {
+	font: bold 14px Verdana;
+}
+
+</style>
 </head>
-<body  style="background-color: rgb(128, 128, 128)">
 
-	<h1>Home</h1>
-	<hr>
-	<h3>Gestionale prodotti</h3>
-	<hr>
-	<form action="https://google.com">
-		<input type="submit" value="Archivio Fornitore" />
-	</form>
-	<hr>
-	<form action="https://www.mobafire.com/league-of-legends/build/absolute-domination-draven-how-to-548731">
-		<input disabled type="submit" value="Archivio Prodotto" />
-	</form>
-	<hr>
-
+<body style="background-color: rgb(128, 128, 128)">
+	<div style="text-align: center">
+		<h1>Home</h1>
+		<hr>
+		<h3>Gestionale prodotti</h3>
+		<hr>
+		<form action="archivioFornitore.do">
+			<input type="submit" value="Archivio Fornitore" />
+		</form>
+		<hr>
+		<form action="archivioProdotto.do">
+			<input type="submit" value="Archivio Prodotto" />
+		</form>
+		<hr>
+	</div>
 </body>
+
 </html>
