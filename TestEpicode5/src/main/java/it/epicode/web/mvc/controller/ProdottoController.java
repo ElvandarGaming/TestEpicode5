@@ -52,7 +52,10 @@ public class ProdottoController{
 
 		long id = Long.parseLong(request.getParameter("id"));
 		Prodotto prod = dao.get(id);
+		String codiceProdotto = prod.getFornitore().getCodiceFornitore();
 		request.setAttribute("prodUpdate", prod);
+		request.setAttribute("xxx", codiceProdotto);
+		
 		return new ForwOrRedir(true, "modificaProdotto.jsp");
 	}
 	

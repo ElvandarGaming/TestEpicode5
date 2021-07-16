@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.epicode.web.mvc.model.Fornitore;
 
@@ -19,7 +20,8 @@ public class FornitoreDAO implements AbsFornitoreDAO {
 	public static final String UPDATE_FORNITORE = "UPDATE negozio.fornitore SET codice_fornitore=?, nome=?, indirizzo=?, citta=? WHERE id=?";
 	public static final String DELETE_FORNITORE = "DELETE FROM negozio.fornitore WHERE id=?";
 	public static final String GET_FORNITORI_BY_CITY = "SELECT id,codice_fornitore,nome,indirizzo,citta FROM negozio.fornitore WHERE citta = ?";
-	private static final String GET_FORNITORE_BY_CODICE_FORNITORE = "SELECT id,codice_fornitore,nome,indirizzo,citta FROM negozio.fornitore WHERE codice_fornitore = ?";;
+	private static final String GET_FORNITORE_BY_CODICE_FORNITORE = "SELECT id,codice_fornitore,nome,indirizzo,citta FROM negozio.fornitore WHERE codice_fornitore = ?";
+	
 
 	public FornitoreDAO(CreatoreConnessione conn) {
 		this.conn = conn;
@@ -64,6 +66,27 @@ public class FornitoreDAO implements AbsFornitoreDAO {
 		}
 		return letto;
 	}
+	@Override
+	public List<String> getAllCodici() throws DataException {
+		List<Fornitore> letto = new ArrayList<>();
+		try (Connection x = conn.getConnection();
+				Statement stat = x.createStatement();
+				ResultSet res = stat.executeQuery(GET_ALL_FORNITORI);) {
+			while (res.next()) {
+				letto.add(new Fornitore(res.getLong("id"), res.getString("codice_fornitore"), res.getString("nome"),
+						res.getString("indirizzo"), res.getString("citta")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
+
+		}
+		List<String> codici = letto.stream().map(Fornitore::getCodiceFornitore).collect(Collectors.toList());
+		
+		return codici;
+	}
+	
 	
 	@Override
 	public List<Fornitore> getAll() throws DataException {

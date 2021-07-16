@@ -25,7 +25,7 @@ body {
 }
 </style>
 </head>
-<body>
+<body  style="background-color: rgb(128, 128, 128)">
 
          <form method="POST" action="inserisciFornitore.do">
       

@@ -97,12 +97,15 @@ public class MainController extends HttpServlet {
 		} catch (Exception e) {
 
 		}
-
+		try {
 		if (fr.isForward()) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(fr.getUrl());
 			dispatcher.forward(request, response);
 		} else {
 			response.sendRedirect(fr.getUrl());
+		}
+		}catch(NullPointerException e) {
+			response.sendRedirect("errorPage.jsp");
 		}
 
 	}

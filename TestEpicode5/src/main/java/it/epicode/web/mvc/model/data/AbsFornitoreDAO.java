@@ -19,4 +19,6 @@ public interface AbsFornitoreDAO {
 	void delete(long id) throws DataException;
 
 	List<Fornitore> getFornitoriPerCitta(String citta) throws DataException;
+
+	List<String> getAllCodici() throws DataException;
 }

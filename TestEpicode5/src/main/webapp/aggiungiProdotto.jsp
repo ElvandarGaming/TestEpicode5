@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="it.epicode.web.mvc.model.data.FornitoreDAO"%>
+   <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,16 +27,32 @@ body {
 }
 </style>
 </head>
-<body>
+<body  style="background-color: rgb(128, 128, 128)">
 
          <form method="POST" action="inserisciProdotto.do">
       
-		<input <c:if test = "${!empty prodUpdate}">readonly</c:if> id ="id" type="text" name="id" value = "${prodUpdate.id}"><label for="id">Id</label><br>
-		<input id= "codiceProdotto" type="text" name="codiceProdotto" value = "${prodUpdate.codiceProdotto}"><label for="codiceProdotto">Codice Prodotto</label><br>
-		<input id = "nome"  type="text" name="nome" value = "${prodUpdate.nome}"><label for="nome">Nome</label><br>
-		<input id= "descrizione" type="text" name="descrizione" value = "${prodUpdate.descrizione}"><label for="descrizione">Descrizione</label><br>
-		<input id= "marca" type="text" name="marca" value = "${prodUpdate.marca}"><label for="marca">Marca</label><br>
-		<input id= "fornitore" type="text" name="fornitore" value = "${prodUpdate.fornitore}"><label for="fornitore">Codice Fornitore</label><br>
+		<input id ="id" type="text" name="id" ><label for="id">Id</label><br>
+		<input id= "codiceProdotto" type="text" name="codiceProdotto" ><label for="codiceProdotto">Codice Prodotto</label><br>
+		<input id = "nome"  type="text" name="nome" ><label for="nome">Nome</label><br>
+		<input id= "descrizione" type="text" name="descrizione" ><label for="descrizione">Descrizione</label><br>
+		<input id= "marca" type="text" name="marca" ><label for="marca">Marca</label><br>
+		
+				
+		<label for="fornitore" id= "fornitore">Codice Fornitore</label>
+		<select name="fornitore" id="fornitore">
+   			
+<%  FornitoreDAO x = new FornitoreDAO(); 
+	List<String> codici = x.getAllCodici();
+	
+	for(String str: codici){
+		out.print("<option value=\"");
+		out.print(str);
+		out.print("\">");
+		out.print(str);
+		out.print("</option>");
+	}
+		%>
+  		</select><br>
 		<input id= "prezzo" type="text" name="prezzo" value = "${prodUpdate.prezzo}"><label for="prezzo">Prezzo</label><br>
 		
 		<input type="submit" value="Conferma">
@@ -42,12 +60,6 @@ body {
 	</form>
 
 <a href="homePage.do" class="button">Annulla</a>
-
-
-
-
-
-
 
 
 </body>

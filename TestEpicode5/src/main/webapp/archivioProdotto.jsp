@@ -52,6 +52,8 @@ table, th, td {
 		out.print("<th>Marca</th>");
 		out.print("<th>Codice Fornitore</th>");
 		out.print("<th>Prezzo</th>");
+		out.print("<th>Modifica</th>");
+		out.print("<th>Elimina</th>");
 	
 		out.print("</tr>");
 		
@@ -65,6 +67,17 @@ table, th, td {
 		out.print("<th>"+prod.getMarca()+"</th>");
 		out.print("<th>"+prod.getFornitore().getCodiceFornitore()+"</th>");
 		out.print("<th>"+prod.getPrezzo()+"</th>");
+		out.print("<th>");
+		out.print("<a href=\"showmodificaprodotto.do?id=");
+		out.print(prod.getId());
+		out.print("\" class=\"button\">Modifica</a>");
+		out.print("</th>");
+		
+		out.print("<th>");
+		out.print("<a href=\"deleteprodotto.do?id=");
+		out.print(prod.getId());
+		out.print("\" class=\"button\">Elimina</a>");
+		out.print("</th>");
 		
 		
 		out.print("</tr>");

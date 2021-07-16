@@ -6,7 +6,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <link type="image/x-icon" href="./icon/BC112.png" rel="shortcut icon">
 <meta charset="ISO-8859-1">
-<title>Modifica Fornitore</title>
+<title>Modifica Prodotto</title>
 <style type="text/css">
 .button {
 	font: bold 11px Arial;
@@ -25,7 +25,7 @@ body {
 }
 </style>
 </head>
-<body>
+<body style="background-color: rgb(128, 128, 128)">
 
          <form method="POST" action="updateProdotto.do">
       
@@ -33,9 +33,9 @@ body {
 		<input id= "codiceProdotto" type="text" name="codiceProdotto" value = "${prodUpdate.codiceProdotto}"><label for="codiceProdotto">Codice Prodotto</label><br>
 		<input id = "nome"  type="text" name="nome" value = "${prodUpdate.nome}"><label for="nome">Nome</label><br>
 		<input id= "descrizione" type="text" name="descrizione" value = "${prodUpdate.descrizione}"><label for="descrizione">Descrizione</label><br>
-		<input id= "marca" type="text" name="marca" value = "${prodUpdate.marca}"><label for="citta">Marca</label><br>
-		<input id= "fornitore" type="text" name="fornitore" value = "${prodUpdate.fornitore}"><label for="fornitore">Città</label><br>
-		<input id= "prezzo" type="text" name="prezzo" value = "${prodUpdate.prezzo}"><label for="citta">Prezzo</label><br>
+		<input id= "marca" type="text" name="marca" value = "${prodUpdate.marca}"><label for="marca">Marca</label><br>
+		<input <c:if test = "${!empty prodUpdate}">readonly</c:if> id= "fornitore" type="text" name="fornitore" value = "${xxx}"><label for="fornitore">Codice Fornitore</label><br>
+		<input id= "prezzo" type="text" name="prezzo" value = "${prodUpdate.prezzo}"><label for="prezzo">Prezzo</label><br>
 		
 		<input type="submit" value="Conferma">
 
