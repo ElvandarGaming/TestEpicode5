@@ -86,7 +86,7 @@ class TestClass {
 			//t.save(prod2);
 			t.save(prod3);
 			
-		} catch (SQLException | DataException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -104,7 +104,7 @@ class TestClass {
 				t.update(prod3);
 				Prodotto upd = t.get(prod3.getId());
 				System.out.println(upd.getPrezzo());
-			} catch (SQLException | DataException e) {
+			} catch (DataException e) {
 				e.printStackTrace();
 				fail("Non va una cippa");
 			}
@@ -132,14 +132,16 @@ class TestClass {
 				"negozio", "postgres", "123");
 		ProdottoDAO t = new ProdottoDAO(portal);
 
+		Prodotto ciccio;
 		try {
-			Prodotto ciccio = t.get(1);
+			ciccio = t.get(1);
 			System.out.println(ciccio.getNome());
-		} catch (SQLException e) {
+			System.out.println("Prodotto restituito");
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
-		System.out.println("Prodotto restituito");
+		
 	}
 	@Test
 	void eliminazioneFornitoreById() {
@@ -163,7 +165,7 @@ class TestClass {
 
 		try {
 			t.delete(3);
-		} catch (SQLException e) {
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
@@ -190,14 +192,16 @@ class TestClass {
 				"negozio", "postgres", "123");
 		ProdottoDAO t = new ProdottoDAO(portal);
 
+		List<Prodotto> ciccio;
 		try {
-			List<Prodotto> ciccio = t.getAll();
+			ciccio = t.getAll();
 			ciccio.forEach(f -> System.out.println(f.getNome()));
-		} catch (SQLException e) {
+			System.out.println("lista Prodotti restituita");
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
-		System.out.println("lista Prodotti restituita");
+		
 	}
 	@Test
 	void updateFornitore() {
@@ -238,14 +242,16 @@ class TestClass {
 				"negozio", "postgres", "123");
 		ProdottoDAO t = new ProdottoDAO(portal);
 		Fornitore rogi = new Fornitore(3, "Y666", "Rogi", "Via lincoln,46", "Padova");
+		List<Prodotto> list;
 		try {
-			List<Prodotto> list = t.getProdottoPerFornitore(rogi);
+			list = t.getProdottoPerFornitore(rogi);
 			list.forEach(f -> System.out.println(f.getNome()));
-		} catch (SQLException e) {
+			System.out.println("lista prodotti per fornitore restituita");
+		} catch (DataException e) {
 			e.printStackTrace();
 			fail("Non va una cippa");
 		}
-		System.out.println("lista prodotti per fornitore restituita");
+	
 	}
 
 	

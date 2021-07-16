@@ -52,8 +52,7 @@ table, th, td {
 		out.print("<th>Marca</th>");
 		out.print("<th>Codice Fornitore</th>");
 		out.print("<th>Prezzo</th>");
-		out.print("<th>Modifica</th>");
-		out.print("<th>Elimina</th>");
+	
 		out.print("</tr>");
 		
 	for (Prodotto prod : prodotti) {
@@ -66,13 +65,14 @@ table, th, td {
 		out.print("<th>"+prod.getMarca()+"</th>");
 		out.print("<th>"+prod.getFornitore().getCodiceFornitore()+"</th>");
 		out.print("<th>"+prod.getPrezzo()+"</th>");
-		String id = prod.getId();
-		out.print("<th>"+"<a href=\"showmodificaprodotto.do?id="+id+ "class=\"button\">Modifica</a>"+"</th>");
-		out.print("<th>"+"<a href=\"deleteProdotto.do?id="+id+" class=\"button\">Elimina</a>"+"</th>");
+		
+		
 		out.print("</tr>");
 	}
 	out.print("</table>");
 	%>
+
+	
 	
 <hr>
 <div style="text-align: center">
