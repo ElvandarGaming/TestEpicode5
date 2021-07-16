@@ -43,7 +43,7 @@ table, th, td {
 	<%
 	List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("LISTA_PRODOTTI");
 		out.print("<table style=\"width:100%\">");
-		out.print("<caption>Lista Fornitori</caption>");
+		out.print("<caption>Lista Prodotti</caption>");
 		out.print("<tr>");
 		out.print("<th>Id</th>");
 		out.print("<th>Codice Prodotto</th>");
@@ -66,9 +66,9 @@ table, th, td {
 		out.print("<th>"+prod.getMarca()+"</th>");
 		out.print("<th>"+prod.getFornitore().getCodiceFornitore()+"</th>");
 		out.print("<th>"+prod.getPrezzo()+"</th>");
-		
-		out.print("<th>"+"cicci"+"</th>");
-		out.print("<th>"+"cicci"+"</th>");
+		String id = prod.getId();
+		out.print("<th>"+"<a href=\"showmodificaprodotto.do?id="+id+ "class=\"button\">Modifica</a>"+"</th>");
+		out.print("<th>"+"<a href=\"deleteProdotto.do?id="+id+" class=\"button\">Elimina</a>"+"</th>");
 		out.print("</tr>");
 	}
 	out.print("</table>");
@@ -76,7 +76,8 @@ table, th, td {
 	
 <hr>
 <div style="text-align: center">
-<a href="showInserisciFornitore.do" class="button">Aggiungi Prodotto</a>
+<a href="showinserisciprodotto.do" class="button">Aggiungi Prodotto</a>
+<a href="homePage.do" class="button">HOME</a>
 </div>
 
 </body>

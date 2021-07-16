@@ -6,7 +6,24 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <link type="image/x-icon" href="./icon/BC112.png" rel="shortcut icon">
 <meta charset="ISO-8859-1">
-<title>Modifica Fornitore</title>
+<title>Aggiungi Fornitore</title>
+<style type="text/css">
+.button {
+	font: bold 11px Arial;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #333333;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+}
+
+body {
+	font: bold 11px Verdana;
+}
+</style>
 </head>
 <body>
 
@@ -22,7 +39,7 @@
 
 	</form>
 
-
+<a href="homePage.do" class="button">Annulla</a>
 
 
 

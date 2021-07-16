@@ -19,6 +19,7 @@ public class FornitoreDAO implements AbsFornitoreDAO {
 	public static final String UPDATE_FORNITORE = "UPDATE negozio.fornitore SET codice_fornitore=?, nome=?, indirizzo=?, citta=? WHERE id=?";
 	public static final String DELETE_FORNITORE = "DELETE FROM negozio.fornitore WHERE id=?";
 	public static final String GET_FORNITORI_BY_CITY = "SELECT id,codice_fornitore,nome,indirizzo,citta FROM negozio.fornitore WHERE citta = ?";
+	private static final String GET_FORNITORE_BY_CODICE_FORNITORE = "SELECT id,codice_fornitore,nome,indirizzo,citta FROM negozio.fornitore WHERE codice_fornitore = ?";;
 
 	public FornitoreDAO(CreatoreConnessione conn) {
 		this.conn = conn;
@@ -46,6 +47,24 @@ public class FornitoreDAO implements AbsFornitoreDAO {
 		}
 		return letto;
 	}
+	
+	public Fornitore get(String codiceFornitore) throws DataException {
+		Fornitore letto = null;
+		try (Connection x = conn.getConnection(); PreparedStatement psta = x.prepareStatement(GET_FORNITORE_BY_CODICE_FORNITORE);) {
+			psta.setString(1 ,codiceFornitore);
+			try (ResultSet res = psta.executeQuery();) {
+				while (res.next()) {
+					letto = new Fornitore(res.getLong("id"), res.getString("codice_fornitore"), res.getString("nome"),
+							res.getString("indirizzo"), res.getString("citta"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DataException(e.getMessage(), e);
+		}
+		return letto;
+	}
+	
 	@Override
 	public List<Fornitore> getAll() throws DataException {
 		List<Fornitore> letto = new ArrayList<>();

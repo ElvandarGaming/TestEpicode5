@@ -53,7 +53,6 @@ public class FornitoreController {
 		String nome = request.getParameter("nome");
 		String indirizzo = request.getParameter("indirizzo");
 		String citta = request.getParameter("citta");
-		
 		Fornitore forn = new Fornitore(id, codiceFornitore, nome, indirizzo, citta);
 		dao.save(forn);
 		return new ForwOrRedir(false , "archivioFornitore.do");

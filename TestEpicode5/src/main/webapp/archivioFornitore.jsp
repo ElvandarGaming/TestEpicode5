@@ -68,6 +68,7 @@ table, th, td {
 <hr>
 <div style="text-align: center">
 <a href="showInserisciFornitore.do" class="button">Aggiungi Fornitore</a>
+<a href="homePage.do" class="button">HOME</a>
 </div>
 
 </body>

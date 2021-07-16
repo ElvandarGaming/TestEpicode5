@@ -39,8 +39,17 @@ public class MainController extends HttpServlet {
 			}
 				break;
 		
+			case "showinserisciprodotto": {
+				fr = new ForwOrRedir(true, "aggiungiProdotto.jsp");
+			}
+				break;
+					
 			case "showmodificafornitore": {
 				fr = fc.caricaFornitore(request, response);
+			}
+				break;
+			case "showmodificaprodotto": {
+				fr = pc.caricaProdotto(request, response);
 			}
 				break;
 				
@@ -48,18 +57,34 @@ public class MainController extends HttpServlet {
 				fr = fc.updateFornitore(request, response);
 			}
 				break;
-			
+			case "updateprodotto": {
+				fr = pc.updateProdotto(request, response);
+			}
+				break;
+				
+				
 			case "archiviofornitore": {
 				fr = fc.listaFornitori(request, response);
 			}
 				break;
+				
+				
 			case "inseriscifornitore": {
 				fr = fc.inserisciFornitore(request, response);
+			}
+				break;
+				
+			case "inserisciprodotto": {
+				fr = pc.inserisciProdotto(request, response);
 			}
 				break;
 			
 			case "deletefornitore": {
 				fr = fc.deleteFornitore(request, response);
+			}
+				break;
+			case "deleteprodotto": {
+				fr = pc.deleteProdotto(request, response);
 			}
 				break;
 			case "archivioprodotto": {
